@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>idzping's Portfolio</title>
+  <script src="./script.js" defer></script>
 
-  <!-- Fonts -->
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -13,308 +14,7 @@
     rel="stylesheet"
   />
 
-  <style>
-    /* Reset and Base Styles */
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-    }
-
-    /* Header Styles */
-    header {
-        background: #d81b60;
-        color: #fff;
-        text-align: center;
-        padding: 0.1rem;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transform: translateY(-100%);
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 0.6rem;
-        padding: 0.1rem 0;
-    }
-
-    nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 0.2rem 0.6rem;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    nav a:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    nav a::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background-color: #fff;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-    }
-
-    nav a:hover::before {
-        width: 80%;
-    }
-
-    header h1 {
-        font-size: 1.2rem;
-        padding: 0.1rem;
-        margin: 0;
-    }
-
-    /* Section Styles */
-    .intro-section {
-        height: 100vh;
-        background: linear-gradient(-45deg, #fff5f6, #ffe4e8, #ffd6dc, #ffc8d0);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .projects, .youtube-section, .instagram-section, .entertainment-section {
-        min-height: 50vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        margin: 0;
-        padding: 2rem;
-    }
-
-    .projects {
-        background: linear-gradient(135deg, #ffffff, #ffe4e8);
-    }
-
-    .youtube-section {
-        background: linear-gradient(135deg, #fff0f3, #ffd6e0);
-    }
-
-    .instagram-section {
-        background: linear-gradient(135deg, #ffffff, #ffe4e8);
-    }
-
-    .entertainment-section {
-        background: linear-gradient(135deg, #fff0f3, #ffd6e0);
-    }
-
-    .section-header {
-        width: 100%;
-        max-width: 1200px;
-        padding: 0.5rem;
-        text-align: center;
-    }
-
-    h2 {
-        color: #d81b60;
-        margin: 0;
-        font-size: 2rem;
-        font-weight: 800;
-    }
-
-    .carousel-container {
-        position: relative;
-        width: 100%;
-        max-width: 1200px;
-        padding: 1rem;
-    }
-
-    .project-grid, .video-grid, .reels-grid, .media-grid {
-        display: flex;
-        gap: 1rem;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        padding: 1rem 0;
-    }
-
-    .project-grid::-webkit-scrollbar,
-    .video-grid::-webkit-scrollbar,
-    .reels-grid::-webkit-scrollbar,
-    .media-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .project-card, .reel-card, .media-card {
-        min-width: 300px;
-        flex-shrink: 0;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-        cursor: pointer;
-    }
-
-    .project-card:hover, .media-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .project-cover, .media-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .project-info, .media-card h3, .media-card p {
-        padding: 1rem;
-    }
-
-    .project-info h3, .media-card h3 {
-        color: #d81b60;
-        margin: 0 0 0.5rem 0;
-    }
-
-    .project-info p {
-        margin: 0;
-        color: #666;
-    }
-
-    .video-grid iframe {
-        min-width: 400px;
-        height: 250px;
-        border-radius: 12px;
-        flex-shrink: 0;
-    }
-
-    .arrow-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #d81b60;
-        color: white;
-        border: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .arrow-btn:hover {
-        background: #c2185b;
-        transform: translateY(-50%) scale(1.1);
-    }
-
-    .arrow-btn.left {
-        left: 0;
-    }
-
-    .arrow-btn.right {
-        right: 0;
-    }
-
-    .typing-text {
-        font-size: 3.5rem;
-        font-weight: 800;
-        overflow: hidden;
-        white-space: nowrap;
-        border-right: 3px solid #d81b60;
-        animation: 
-            typing 3.5s steps(40, end),
-            blink-caret .75s step-end infinite;
-    }
-
-    .loading {
-        text-align: center;
-        padding: 2rem;
-        color: #d81b60;
-        font-weight: 600;
-    }
-
-    .spinner {
-        border: 4px solid #ffe4e8;
-        border-top: 4px solid #d81b60;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 1rem;
-    }
-
-    footer {
-        background: #d81b60;
-        color: #fff;
-        text-align: center;
-        padding: 0.3rem;
-        font-size: 0.9rem;
-        font-weight: 800;
-    }
-
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: #d81b60 }
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-        .video-grid iframe {
-            min-width: 300px;
-            height: 200px;
-        }
-        
-        .arrow-btn {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
  
@@ -323,15 +23,41 @@
         <nav>
             <a href="#projects" class="nav-link">Projects</a>
             <a href="#youtube" class="nav-link">YouTube</a>
-            <a href="#instagram" class="nav-link">Instagram</a>
+            
             <a href="#entertainment" class="nav-link">Entertainment</a>
         </nav>
     </header>
 
     <section class="intro-section">
-        <div class="intro-text">
-            <h2 class="typing-text">Welcome to my space</h2>
+         <section class="intro-section">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2 class="typing-text">Welcome to my space</h2>
+            </div>
+            <div class="social-icons">
+                <a href="https://instagram.com/idzping" target="_blank" class="social-icon instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://open.spotify.com/user/31f4umwuopvdhwv64xui6ymkdpcm" target="_blank" class="social-icon spotify">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                </a>
+                <a href="https://youtube.com/@idzping" target="_blank" class="social-icon youtube">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/idzping" target="_blank" class="social-icon x">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
+    </section>
     </section>
 
     <section id="projects" class="projects">
@@ -392,143 +118,6 @@
         <p>&copy; idzping</p>
     </footer>
 
-  <script>
-    // ==================== PROJECTS DATA ====================
-    const PROJECTS_DATA = [
-        {
-            id: 1,
-            title: "Portfolio Website",
-            description: "A beautiful portfolio showcasing my work",
-            image: "https://i.redd.it/obvqaa0lhn841.jpg",
-            link: "https://example.com/portfolio"
-        },
-        {
-            id: 2,
-            title: "E-commerce App",
-            description: "Full-stack shopping application",
-            image: "https://images.news18.com/ibnlive/uploads/2023/05/untitled-2023-05-23t161255.209.jpg",
-            link: "https://example.com/ecommerce"
-        },
-        {
-            id: 3,
-            title: "Weather Dashboard",
-            description: "Real-time weather information",
-            image: "https://pbs.twimg.com/media/GRFkLbvXEAAQtVY.jpg",
-            link: "https://example.com/weather"
-        }
-    ];
-
-    // ==================== INITIALIZATION ====================
-    document.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('header');
-        setTimeout(() => {
-            header.style.transform = 'translateY(0)';
-        }, 2000);
-        
-        loadProjects();
-        loadYouTubeVideos();
-    });
-
-    // ==================== HEADER SCROLL ====================
-    let lastScrollTop = 0;
-    const header = document.querySelector('header');
-    const SCROLL_THRESHOLD = 5;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        if (Math.abs(lastScrollTop - currentScroll) <= SCROLL_THRESHOLD) return;
-        
-        if (currentScroll > lastScrollTop) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = currentScroll;
-    }, { passive: true });
-
-    // ==================== NAVIGATION ====================
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            const headerOffset = 80;
-            const elementPosition = targetSection.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // ==================== CAROUSEL SCROLL ====================
-    function scrollCarousel(gridId, direction) {
-        const grid = document.getElementById(gridId);
-        const scrollAmount = 320;
-        grid.scrollBy({
-            left: direction * scrollAmount,
-            behavior: 'smooth'
-        });
-    }
-
-    // ==================== PROJECTS ====================
-    function loadProjects() {
-        const grid = document.getElementById('project-grid');
-        grid.innerHTML = '';
-        
-        PROJECTS_DATA.forEach(project => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.onclick = () => window.open(project.link, '_blank');
-            
-            card.innerHTML = `
-                <img src="${project.image}" alt="${project.title}" class="project-cover" 
-                     onerror="this.src='https://via.placeholder.com/300x200/d81b60/ffffff?text=Image+Error'">
-                <div class="project-info">
-                    <h3>${project.title}</h3>
-                    <p>${project.description}</p>
-                </div>
-            `;
-            
-            grid.appendChild(card);
-        });
-    }
-
-    // ==================== YOUTUBE (UPDATED TO USE NETLIFY FUNCTION) ====================
-    async function loadYouTubeVideos() {
-        const grid = document.getElementById('video-grid');
-        
-        try {
-            // Call our Netlify serverless function instead of YouTube API directly
-            const response = await fetch('/.netlify/functions/youtube');
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            grid.innerHTML = '';
-            
-            if (data.items && data.items.length > 0) {
-                data.items.forEach(item => {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${item.id.videoId}`;
-                    iframe.loading = 'lazy';
-                    iframe.frameBorder = '0';
-                    iframe.allowFullscreen = true;
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    grid.appendChild(iframe);
-                });
-            } else {
-                grid.innerHTML = '<p class="loading">No videos found</p>';
-            }
-        } catch (error) {
-            console.error('YouTube Loading Error:', error);
-            grid.innerHTML = '<p class="loading">Unable to load videos. Please try again later.</p>';
-        }
-    }
-  </script>
+ 
 </body>
 </html>
