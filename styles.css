@@ -150,11 +150,12 @@
         text-align: center;
     }
 
-    h2 {
+    h2, h2 a{
         color: #d81b60;
         margin: 0;
         font-size: 2rem;
         font-weight: 800;
+        text-decoration: none;
     }
 
     .carousel-container {
