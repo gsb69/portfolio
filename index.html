@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>idzping's Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+        background: #d81b60;
+        color: #fff;
+        text-align: center;
+        padding: 0.1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.1rem 0;
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    nav a:hover::before {
+        width: 80%;
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+        padding: 0.1rem;
+        margin: 0;
+    }
+
+    /* Section Styles */
+    .intro-section {
+        height: 100vh;
+        background: linear-gradient(-45deg, #fff5f6, #ffe4e8, #ffd6dc, #ffc8d0);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .projects, .youtube-section, .instagram-section, .entertainment-section {
+        min-height: 50vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        margin: 0;
+        padding: 2rem;
+    }
+
+    .projects {
+        background: linear-gradient(135deg, #ffffff, #ffe4e8);
+    }
+
+    .youtube-section {
+        background: linear-gradient(135deg, #fff0f3, #ffd6e0);
+    }
+
+    .instagram-section {
+        background: linear-gradient(135deg, #ffffff, #ffe4e8);
+    }
+
+    .entertainment-section {
+        background: linear-gradient(135deg, #fff0f3, #ffd6e0);
+    }
+
+    .section-header {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    h2 {
+        color: #d81b60;
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        padding: 1rem;
+    }
+
+    .project-grid, .video-grid, .reels-grid, .media-grid {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 1rem 0;
+    }
+
+    .project-grid::-webkit-scrollbar,
+    .video-grid::-webkit-scrollbar,
+    .reels-grid::-webkit-scrollbar,
+    .media-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-card, .reel-card, .media-card {
+        min-width: 300px;
+        flex-shrink: 0;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .project-card:hover, .media-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .project-cover, .media-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .project-info, .media-card h3, .media-card p {
+        padding: 1rem;
+    }
+
+    .project-info h3, .media-card h3 {
+        color: #d81b60;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .project-info p {
+        margin: 0;
+        color: #666;
+    }
+
+    .video-grid iframe {
+        min-width: 400px;
+        height: 250px;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .arrow-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #d81b60;
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .arrow-btn:hover {
+        background: #c2185b;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-btn.left {
+        left: 0;
+    }
+
+    .arrow-btn.right {
+        right: 0;
+    }
+
+    .typing-text {
+        font-size: 3.5rem;
+        font-weight: 800;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 3px solid #d81b60;
+        animation: 
+            typing 3.5s steps(40, end),
+            blink-caret .75s step-end infinite;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 2rem;
+        color: #d81b60;
+        font-weight: 600;
+    }
+
+    .spinner {
+        border: 4px solid #ffe4e8;
+        border-top: 4px solid #d81b60;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+    }
+
+    footer {
+        background: #d81b60;
+        color: #fff;
+        text-align: center;
+        padding: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #d81b60 }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+        .video-grid iframe {
+            min-width: 300px;
+            height: 200px;
+        }
+        
+        .arrow-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+    }
+  </style>
+</head>
+<body>
+ 
+    <header>
+        <h1>idzping</h1>
+        <nav>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#youtube" class="nav-link">YouTube</a>
+            <a href="#instagram" class="nav-link">Instagram</a>
+            <a href="#entertainment" class="nav-link">Entertainment</a>
+        </nav>
+    </header>
+
+    <section class="intro-section">
+        <div class="intro-text">
+            <h2 class="typing-text">Welcome to my space</h2>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <h2>Projects</h2>
+        </div>
+        <div class="carousel-container">
+            <button class="arrow-btn left" onclick="scrollCarousel('project-grid', -1)">‹</button>
+            <div class="project-grid" id="project-grid"></div>
+            <button class="arrow-btn right" onclick="scrollCarousel('project-grid', 1)">›</button>
+        </div>
+    </section>
+
+    <section class="youtube-section" id="youtube">
+        <div class="section-header">
+            <h2>YouTube Content</h2>
+        </div>
+        <div class="carousel-container">
+            <button class="arrow-btn left" onclick="scrollCarousel('video-grid', -1)">‹</button>
+            <div class="video-grid" id="video-grid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Loading videos...
+                </div>
+            </div>
+            <button class="arrow-btn right" onclick="scrollCarousel('video-grid', 1)">›</button>
+        </div>
+    </section>
+
+    <section class="entertainment-section" id="entertainment">
+        <div class="section-header">
+            <h2>Favorite Movies & Series</h2>
+        </div>
+        <div class="carousel-container">
+            <button class="arrow-btn left" onclick="scrollCarousel('media-grid', -1)">‹</button>
+            <div class="media-grid" id="media-grid">
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/300x200/d81b60/ffffff?text=Movie+1" alt="Movie 1">
+                    <h3>Movie Title</h3>
+                    <p>Brief description or rating</p>
+                </div>
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/300x200/d81b60/ffffff?text=Series+1" alt="Series 1">
+                    <h3>Series Title</h3>
+                    <p>Brief description or rating</p>
+                </div>
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/300x200/d81b60/ffffff?text=Movie+2" alt="Movie 2">
+                    <h3>Another Movie</h3>
+                    <p>Great movie!</p>
+                </div>
+            </div>
+            <button class="arrow-btn right" onclick="scrollCarousel('media-grid', 1)">›</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; idzping</p>
+    </footer>
+
+  <script>
+    // ==================== PROJECTS DATA ====================
+    const PROJECTS_DATA = [
+        {
+            id: 1,
+            title: "Portfolio Website",
+            description: "A beautiful portfolio showcasing my work",
+            image: "https://i.redd.it/obvqaa0lhn841.jpg",
+            link: "https://example.com/portfolio"
+        },
+        {
+            id: 2,
+            title: "E-commerce App",
+            description: "Full-stack shopping application",
+            image: "https://images.news18.com/ibnlive/uploads/2023/05/untitled-2023-05-23t161255.209.jpg",
+            link: "https://example.com/ecommerce"
+        },
+        {
+            id: 3,
+            title: "Weather Dashboard",
+            description: "Real-time weather information",
+            image: "https://pbs.twimg.com/media/GRFkLbvXEAAQtVY.jpg",
+            link: "https://example.com/weather"
+        }
+    ];
+
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        setTimeout(() => {
+            header.style.transform = 'translateY(0)';
+        }, 2000);
+        
+        loadProjects();
+        loadYouTubeVideos();
+    });
+
+    // ==================== HEADER SCROLL ====================
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    const SCROLL_THRESHOLD = 5;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        if (Math.abs(lastScrollTop - currentScroll) <= SCROLL_THRESHOLD) return;
+        
+        if (currentScroll > lastScrollTop) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = currentScroll;
+    }, { passive: true });
+
+    // ==================== NAVIGATION ====================
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            const headerOffset = 80;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // ==================== CAROUSEL SCROLL ====================
+    function scrollCarousel(gridId, direction) {
+        const grid = document.getElementById(gridId);
+        const scrollAmount = 320;
+        grid.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+
+    // ==================== PROJECTS ====================
+    function loadProjects() {
+        const grid = document.getElementById('project-grid');
+        grid.innerHTML = '';
+        
+        PROJECTS_DATA.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = () => window.open(project.link, '_blank');
+            
+            card.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" class="project-cover" 
+                     onerror="this.src='https://via.placeholder.com/300x200/d81b60/ffffff?text=Image+Error'">
+                <div class="project-info">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+    }
+
+    // ==================== YOUTUBE (UPDATED TO USE NETLIFY FUNCTION) ====================
+    async function loadYouTubeVideos() {
+        const grid = document.getElementById('video-grid');
+        
+        try {
+            // Call our Netlify serverless function instead of YouTube API directly
+            const response = await fetch('/.netlify/functions/youtube');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            grid.innerHTML = '';
+            
+            if (data.items && data.items.length > 0) {
+                data.items.forEach(item => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${item.id.videoId}`;
+                    iframe.loading = 'lazy';
+                    iframe.frameBorder = '0';
+                    iframe.allowFullscreen = true;
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    grid.appendChild(iframe);
+                });
+            } else {
+                grid.innerHTML = '<p class="loading">No videos found</p>';
+            }
+        } catch (error) {
+            console.error('YouTube Loading Error:', error);
+            grid.innerHTML = '<p class="loading">Unable to load videos. Please try again later.</p>';
+        }
+    }
+  </script>
+</body>
+</html>
